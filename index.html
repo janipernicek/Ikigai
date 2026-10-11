@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#211638">
+<title>IKIGAI – Najdi svůj směr</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:18px;font-family:Arial,sans-serif;color:#302344;background:linear-gradient(135deg,#e0fbf6,#eee5ff,#fff3e9);min-height:100vh}
+main{max-width:680px;margin:auto}
+header,.card{border-radius:25px;padding:27px;margin-bottom:18px}
+header{color:white;background:linear-gradient(135deg,#211638,#57378a,#087f83);box-shadow:0 15px 40px #30234425}
+.brand{font-size:11px;letter-spacing:4px;color:#53e0d0}
+h1{font:normal 52px Georgia,serif;letter-spacing:5px;margin:20px 0 10px;color:#f2d69b}
+header p{line-height:1.8;color:#f0e9ff}
+.card{background:#ffffffd9;border:1px solid white;box-shadow:0 10px 30px #3023440e}
+h2{font:normal 28px Georgia,serif;color:#513478;line-height:1.3}
+p{line-height:1.7}
+.small{font-size:13px;color:#786c88}
+.pill{display:inline-block;padding:7px 12px;border-radius:30px;background:#53e0d033;color:#087f83;font-size:11px;letter-spacing:1px}
+button{font:inherit;cursor:pointer}
+.primary{width:100%;padding:16px;border:0;border-radius:14px;background:linear-gradient(100deg,#53e0d0,#c8b5ff,#e8c887);color:#211638;font-weight:bold;margin-top:16px}
+.option{width:100%;padding:15px;text-align:left;margin:6px 0;border:1px solid #e2d7f1;border-radius:14px;background:#fff;color:#302344}
+.option.selected{border:2px solid #087f83;background:#dff9f4}
+.option:hover{border-color:#8057d9}
+.progress{height:6px;background:#e7def3;border-radius:10px;margin:15px 0 25px;overflow:hidden}
+#bar{height:100%;width:0;background:linear-gradient(90deg,#53e0d0,#8057d9,#e8c887)}
+.result{padding:18px;border-radius:16px;background:linear-gradient(120deg,#53e0d026,#c8b5ff55);margin:14px 0}
+footer{text-align:center;font-size:12px;color:#766c83;padding:15px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="brand">TVŮJ NOVÝ ZAČÁTEK ✧</div>
+<h1>IKIGAI</h1>
+<p>Objev, co ti dává smysl.<br>Najdi svůj směr.<br><b>Vytvoř něco vlastního.</b></p>
+</header>
+
+<section class="card" id="intro">
+<span class="pill">TVŮJ PŘÍBĚH ZAČÍNÁ</span>
+<h2>Co kdyby tvůj další krok začínal u tebe?</h2>
+<p>Chceš dělat něco vlastního, ale nevíš, kde začít? Prozkoumej své zájmy, schopnosti a možnosti. Společně najdeme první směr, který stojí za to prozkoumat.</p>
+<p class="small">Nejde o test, který rozhodne o tvé budoucnosti. Je to začátek objevování.</p>
+<button class="primary" onclick="start()">OBJEVIT SVŮJ SMĚR →</button>
+</section>
+
+<section class="card" id="quiz" hidden>
+<div class="small" id="count"></div>
+<div class="progress"><div id="bar"></div></div>
+<h2 id="title"></h2>
+<p class="small" id="hint"></p>
+<div id="opts"></div>
+<button class="primary" onclick="next()" id="next">POKRAČOVAT →</button>
+</section>
+
+<section class="card" id="result" hidden>
+<span class="pill">TVŮJ PRVNÍ SMĚR</span>
+<h2 id="headline"></h2>
+<p id="introResult"></p>
+<div id="ideas"></div>
+<h2>Tvůj první krok</h2>
+<p id="action"></p>
+<div class="result">
+<b>Nemusíš na to být sama. 💜</b>
+<p>Pomůžu ti proměnit první nápad v konkrétní plán a prozkoumat, jak z něj vytvořit vlastní projekt.</p>
+</div>
+<button class="primary" onclick="contact()">CHCI SVŮJ NÁPAD ROZPRACOVAT S JANOU →</button>
+<button class="primary" onclick="restart()" style="background:#eee5ff">ZAČÍT ZNOVU ↺</button>
+<p class="small">Výsledek je inspirace, nikoli záruka podnikatelského úspěchu.</p>
+</section>
+<footer>✧ IKIGAI · Malé kroky otevírají nové možnosti ✧</footer>
+</main>
+
+<script>
+const CONTACT_URL="https://www.instagram.com/";
+const qs=[
+["Co tě nejvíc baví?",["Pomáhat a naslouchat lidem","Tvořit a vymýšlet nové věci","Učit se a předávat znalosti","Plánovat a organizovat"],["lidé","tvorba","učení","systémy"]],
+["V čem jsi dobrá?",["Podporuji a chápu druhé","Přicházím s nápady","Vysvětluji a učím","Organizuji a řeším problémy"],["lidé","tvorba","učení","systémy"]],
+["Co tě nejvíc zajímá?",["Osobní rozvoj a vztahy","Design a digitální tvorba","Vzdělávání a informace","Podnikání a chytré systémy"],["lidé","tvorba","učení","systémy"]],
+["Komu bys ráda pomáhala?",["Ženám hledajícím nový směr","Lidem s nápady","Lidem, kteří se chtějí něco naučit","Podnikatelům a malým firmám"],["lidé","tvorba","učení","systémy"]],
+["Jaký produkt tě láká?",["Konzultace nebo individuální podpora","Digitální produkt či aplikace","Kurz nebo praktický průvodce","Organizační nástroj či služba"],["lidé","tvorba","učení","systémy"]],
+["Co je pro tebe teď nejdůležitější?",["Začít pomalu vedle povinností","Vytvořit něco online s malými náklady","Nejdřív nápad otestovat","Udělat si jasno a zvolit směr"],["malé kroky","online","test","jasno"]]
+];
+const profiles={
+"lidé":["Tvoje síla může být v práci s lidmi.","Mohla bys prozkoumat podporu konkrétní skupiny lidí, konzultace nebo praktický průvodce. Zvaž své zkušenosti a kompetence.","Promluv si se třemi lidmi, kterým bys chtěla pomáhat. Zjisti, co skutečně potřebují."],
+"tvorba":["Tvoje síla může být v tvorbě nových řešení.","Zvaž digitální produkty, šablony nebo jednoduché online nástroje řešící konkrétní problém.","Sepiš tři problémy, které umíš řešit, a zamysli se, komu by tvé řešení pomohlo."],
+"učení":["Tvoje síla může být v předávání znalostí.","Zvaž vzdělávací obsah, pracovní sešit nebo praktický návod v oblasti, kterou dobře znáš.","Sepiš pět otázek, které lidé často pokládají k tématu, kterému rozumíš."],
+"systémy":["Tvoje síla může být v hledání systému.","Zvaž organizační šablony nebo služby, které podnikatelům usnadní opakující se úkoly.","Zeptej se tří podnikatelů, co jim zbytečně zabírá čas."]
+};
+let i=0,answers=[];
+function start(){i=0;answers=[];show("quiz");render();window.scrollTo(0,0)}
+function show(id){["intro","quiz","result"].forEach(x=>document.getElementById(x).hidden=x!==id)}
+function render(){
+let q=qs[i];
+document.getElementById("count").textContent=`OTÁZKA ${i+1} / ${qs.length}`;
+document.getElementById("bar").style.width=((i+1)/qs.length*100)+"%";
+document.getElementById("title").textContent=q[0];
+document.getElementById("hint").textContent="Vyber odpověď, která ti právě teď sedí nejvíc.";
+document.getElementById("next").textContent=i===qs.length-1?"UKÁZAT MŮJ SMĚR →":"POKRAČOVAT →";
+document.getElementById("opts").innerHTML="";
+q[1].forEach((text,j)=>{
+let b=document.createElement("button");
+b.className="option"+(answers[i]===j?" selected":"");
+b.textContent=["✧ ","◇ ","♡ ","✦ "][j]+text;
+b.onclick=()=>{answers[i]=j;render()};
+document.getElementById("opts").appendChild(b);
+});
+}
+function next(){
+if(answers[i]===undefined){alert("Vyber prosím jednu odpověď. 💜");return}
+if(i<qs.length-1){i++;render()}else finish()
+}
+function finish(){
+let scores={};
+answers.slice(0,5).forEach((a,j)=>{let k=qs[j][2][a];scores[k]=(scores[k]||0)+1});
+let best=Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0];
+let p=profiles[best]||profiles["tvorba"];
+document.getElementById("headline").textContent=p[0];
+document.getElementById("introResult").textContent=p[1];
+document.getElementById("ideas").innerHTML="";
+let suggestions=[p[1],"Začni tím, že ověříš, zda lidé tento problém opravdu potřebují řešit."];
+suggestions.forEach((s,j)=>{
+let d=document.createElement("div");d.className="result";
+let b=document.createElement("b");b.textContent=j===0?"Možný směr":"Co si ověřit";
+let t=document.createElement("p");t.textContent=s;d.append(b,t);
+document.getElementById("ideas").appendChild(d);
+});
+let last=qs[5][2][answers[5]];
+let actions={
+"malé kroky":"Vyhraď si 30 minut týdně na jeden malý krok.",
+"online":"Načrtni nejmenší užitečnou verzi svého digitálního produktu.",
+"test":"Ukaž svůj nápad pěti potenciálním zákazníkům a ptej se na jejich potřeby.",
+"jasno":"Porovnej tři nápady podle svých zájmů, schopností, potřeb trhu a času."
+};
+document.getElementById("action").textContent=actions[last]||p[2];
+show("result");window.scrollTo(0,0)
+}
+function contact(){window.open(CONTACT_URL,"_blank","noopener,noreferrer")}
+function restart(){show("intro");window.scrollTo(0,0)}
+</script>
+</body>
+</html>
