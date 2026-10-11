@@ -2,144 +2,490 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#211638">
-<title>IKIGAI – Najdi svůj směr</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#211344">
+<meta name="description" content="Objev, co ti dává smysl. Najdi svůj směr. Vytvoř něco vlastního.">
+<title>IKIGAI | Najdi svůj směr</title>
 <style>
+:root{
+  --purple:#28164c;
+  --deep:#180e30;
+  --turquoise:#5ce0d0;
+  --lavender:#c5a9ff;
+  --gold:#e8c987;
+  --coral:#ff9c9c;
+  --cream:#fffaf2;
+}
 *{box-sizing:border-box}
-body{margin:0;padding:18px;font-family:Arial,sans-serif;color:#302344;background:linear-gradient(135deg,#e0fbf6,#eee5ff,#fff3e9);min-height:100vh}
-main{max-width:680px;margin:auto}
-header,.card{border-radius:25px;padding:27px;margin-bottom:18px}
-header{color:white;background:linear-gradient(135deg,#211638,#57378a,#087f83);box-shadow:0 15px 40px #30234425}
-.brand{font-size:11px;letter-spacing:4px;color:#53e0d0}
-h1{font:normal 52px Georgia,serif;letter-spacing:5px;margin:20px 0 10px;color:#f2d69b}
-header p{line-height:1.8;color:#f0e9ff}
-.card{background:#ffffffd9;border:1px solid white;box-shadow:0 10px 30px #3023440e}
-h2{font:normal 28px Georgia,serif;color:#513478;line-height:1.3}
-p{line-height:1.7}
-.small{font-size:13px;color:#786c88}
-.pill{display:inline-block;padding:7px 12px;border-radius:30px;background:#53e0d033;color:#087f83;font-size:11px;letter-spacing:1px}
-button{font:inherit;cursor:pointer}
-.primary{width:100%;padding:16px;border:0;border-radius:14px;background:linear-gradient(100deg,#53e0d0,#c8b5ff,#e8c887);color:#211638;font-weight:bold;margin-top:16px}
-.option{width:100%;padding:15px;text-align:left;margin:6px 0;border:1px solid #e2d7f1;border-radius:14px;background:#fff;color:#302344}
-.option.selected{border:2px solid #087f83;background:#dff9f4}
-.option:hover{border-color:#8057d9}
-.progress{height:6px;background:#e7def3;border-radius:10px;margin:15px 0 25px;overflow:hidden}
-#bar{height:100%;width:0;background:linear-gradient(90deg,#53e0d0,#8057d9,#e8c887)}
-.result{padding:18px;border-radius:16px;background:linear-gradient(120deg,#53e0d026,#c8b5ff55);margin:14px 0}
-footer{text-align:center;font-size:12px;color:#766c83;padding:15px}
-[hidden]{display:none!important}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--deep);
+  color:var(--cream);
+  line-height:1.6;
+}
+button,a{font:inherit}
+button{cursor:pointer}
+.hero{
+  min-height:100vh;
+  padding:25px 18px 45px;
+  background:
+    radial-gradient(ellipse at 10% 15%,#56328a 0,transparent 45%),
+    radial-gradient(ellipse at 90% 80%,#075c62 0,transparent 45%),
+    var(--deep);
+}
+nav{
+  max-width:900px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.logo{
+  font-size:23px;
+  font-weight:900;
+  letter-spacing:5px;
+  color:var(--turquoise);
+}
+.badge{
+  border:1px solid #e8c98788;
+  color:var(--gold);
+  border-radius:30px;
+  padding:6px 12px;
+  font-size:12px;
+}
+main{max-width:760px;margin:55px auto 0}
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:3px;
+  color:var(--gold);
+  font-size:12px;
+  font-weight:bold;
+}
+h1{
+  font-size:clamp(43px,9vw,76px);
+  line-height:1.04;
+  margin:18px 0;
+  letter-spacing:-2px;
+}
+h1 span{color:var(--turquoise)}
+.intro{
+  color:#e0d9ee;
+  font-size:18px;
+  max-width:600px;
+}
+.card{
+  background:#ffffff0b;
+  border:1px solid #ffffff20;
+  border-radius:25px;
+  padding:clamp(20px,5vw,36px);
+  margin-top:30px;
+  box-shadow:0 20px 70px #0002;
+  backdrop-filter:blur(12px);
+}
+h2{font-size:27px;line-height:1.25;margin-top:0}
+.muted{color:#c9bfdc}
+.btn{
+  display:inline-block;
+  border:0;
+  border-radius:14px;
+  padding:14px 20px;
+  text-decoration:none;
+  font-weight:bold;
+  transition:transform .2s,opacity .2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.primary{
+  background:linear-gradient(110deg,var(--turquoise),#b4f4e9);
+  color:#19213a;
+}
+.secondary{
+  color:var(--cream);
+  border:1px solid #ffffff55;
+  background:#ffffff0b;
+}
+.buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:25px}
+.progress-wrap{margin:18px 0 26px}
+.progress-info{
+  display:flex;justify-content:space-between;
+  color:#c9bfdc;font-size:13px;margin-bottom:8px
+}
+.progress{height:6px;background:#ffffff20;border-radius:9px;overflow:hidden}
+.bar{height:100%;width:0;background:var(--turquoise);transition:width .3s}
+.question{font-size:24px;font-weight:bold;margin:10px 0 20px}
+.answers{display:grid;gap:11px}
+.answer{
+  text-align:left;
+  padding:15px 16px;
+  border:1px solid #ffffff2a;
+  border-radius:14px;
+  background:#ffffff08;
+  color:var(--cream);
+  display:flex;gap:12px;align-items:flex-start;
+}
+.answer:hover,.answer:focus{
+  border-color:var(--turquoise);
+  background:#5ce0d014;
+}
+.answer .symbol{color:var(--turquoise);font-size:19px}
+.answer.selected{
+  border-color:var(--turquoise);
+  background:#5ce0d022;
+}
+.hidden{display:none!important}
+.result-tag{
+  color:var(--turquoise);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:12px;font-weight:bold;
+}
+.result-title{color:var(--gold);font-size:32px;margin:8px 0 14px}
+.steps{padding-left:22px}
+.steps li{margin:10px 0;color:#e0d9ee}
+.contact{
+  background:linear-gradient(140deg,#54347d,#174d56);
+  border:1px solid #c5a9ff55;
+  border-radius:20px;padding:22px;margin-top:25px
+}
+.contact h3{margin-top:0;font-size:22px}
+footer{
+  text-align:center;padding:25px 16px 35px;
+  color:#bcb0d1;font-size:13px
+}
+footer a{color:var(--turquoise);text-decoration:none}
+.decor{color:var(--coral)}
+.small{font-size:13px;color:#bcb0d1}
+@media(min-width:700px){
+  main{margin-top:75px}
+  .card{padding:38px}
+}
 </style>
 </head>
 <body>
-<main>
-<header>
-<div class="brand">TVŮJ NOVÝ ZAČÁTEK ✧</div>
-<h1>IKIGAI</h1>
-<p>Objev, co ti dává smysl.<br>Najdi svůj směr.<br><b>Vytvoř něco vlastního.</b></p>
-</header>
+<div class="hero">
+  <nav>
+    <div class="logo">IKIGAI<span class="decor">.</span></div>
+    <div class="badge">TVŮJ NOVÝ ZAČÁTEK</div>
+  </nav>
 
-<section class="card" id="intro">
-<span class="pill">TVŮJ PŘÍBĚH ZAČÍNÁ</span>
-<h2>Co kdyby tvůj další krok začínal u tebe?</h2>
-<p>Chceš dělat něco vlastního, ale nevíš, kde začít? Prozkoumej své zájmy, schopnosti a možnosti. Společně najdeme první směr, který stojí za to prozkoumat.</p>
-<p class="small">Nejde o test, který rozhodne o tvé budoucnosti. Je to začátek objevování.</p>
-<button class="primary" onclick="start()">OBJEVIT SVŮJ SMĚR →</button>
-</section>
+  <main>
+    <section id="welcome">
+      <div class="eyebrow">Čas najít vlastní směr</div>
+      <h1>To, co hledáš,<br>může začít <span>v tobě.</span></h1>
+      <p class="intro">
+        Máš v hlavě nápady, touhu něco změnit nebo chuť začít podnikat,
+        ale zatím nevíš, kudy se vydat? Pojďme společně objevit,
+        co je ti blízké a jak z toho může vzniknout něco vlastního.
+      </p>
 
-<section class="card" id="quiz" hidden>
-<div class="small" id="count"></div>
-<div class="progress"><div id="bar"></div></div>
-<h2 id="title"></h2>
-<p class="small" id="hint"></p>
-<div id="opts"></div>
-<button class="primary" onclick="next()" id="next">POKRAČOVAT →</button>
-</section>
+      <div class="card">
+        <h2>Tvůj nápad nemusí být hotový.</h2>
+        <p class="muted">
+          Stačí být zvědavá. Odpověz na šest krátkých otázek
+          a získej inspiraci pro svůj další krok.
+        </p>
+        <p>✦ Bez správných a špatných odpovědí.</p>
+        <p>✦ Bez nutnosti mít už hotový produkt.</p>
+        <p>✦ S prostorem začít přesně tam, kde jsi.</p>
+        <button class="btn primary" onclick="startQuiz()">Jdu objevovat svůj směr&nbsp; →</button>
+      </div>
+    </section>
 
-<section class="card" id="result" hidden>
-<span class="pill">TVŮJ PRVNÍ SMĚR</span>
-<h2 id="headline"></h2>
-<p id="introResult"></p>
-<div id="ideas"></div>
-<h2>Tvůj první krok</h2>
-<p id="action"></p>
-<div class="result">
-<b>Nemusíš na to být sama. 💜</b>
-<p>Pomůžu ti proměnit první nápad v konkrétní plán a prozkoumat, jak z něj vytvořit vlastní projekt.</p>
+    <section id="quiz" class="card hidden">
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span id="progressText">OTÁZKA 1 Z 6</span>
+          <span id="percent">17 %</span>
+        </div>
+        <div class="progress"><div class="bar" id="bar"></div></div>
+      </div>
+      <div class="eyebrow">Poznej sama sebe</div>
+      <div class="question" id="question"></div>
+      <div class="answers" id="answers"></div>
+      <div class="buttons">
+        <button class="btn secondary" id="back" onclick="previousQuestion()">← Zpět</button>
+      </div>
+    </section>
+
+    <section id="result" class="card hidden">
+      <div class="result-tag">Tvoje inspirace</div>
+      <h2>Podívej se, co se v tobě rýsuje.</h2>
+      <p class="muted">
+        Tvoje odpovědi nejsou nálepka ani definitivní diagnóza.
+        Jsou začátkem přemýšlení o směru, který by ti mohl sedět.
+      </p>
+      <div class="contact">
+        <div class="result-tag">Směr, který můžeš prozkoumat</div>
+        <div class="result-title" id="resultTitle"></div>
+        <p id="resultDescription"></p>
+      </div>
+      <h2 style="margin-top:30px">Tvůj první malý plán</h2>
+      <p class="muted">Nemusíš hned budovat celé podnikání. Začni tímhle:</p>
+      <ol class="steps" id="steps"></ol>
+      <div class="contact">
+        <h3>Chceš svůj nápad posunout dál? <span class="decor">✦</span></h3>
+        <p>
+          Nemusíš na to být sama. Ozvi se mi a můžeme společně
+          prozkoumat, jak tvůj nápad proměnit v konkrétní projekt.
+        </p>
+        <div class="buttons">
+          <a class="btn primary" href="https://www.instagram.com/janapernicova/" target="_blank" rel="noopener">Najdeš mě na Instagramu</a>
+          <a class="btn secondary" href="https://wa.me/420773664342" target="_blank" rel="noopener">Napsat na WhatsApp</a>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="btn secondary" onclick="restartQuiz()">Zkusit znovu ↻</button>
+      </div>
+    </section>
+  </main>
 </div>
-<button class="primary" onclick="contact()">CHCI SVŮJ NÁPAD ROZPRACOVAT S JANOU →</button>
-<button class="primary" onclick="restart()" style="background:#eee5ff">ZAČÍT ZNOVU ↺</button>
-<p class="small">Výsledek je inspirace, nikoli záruka podnikatelského úspěchu.</p>
-</section>
-<footer>✧ IKIGAI · Malé kroky otevírají nové možnosti ✧</footer>
-</main>
+
+<footer>
+  <div class="logo">IKIGAI<span class="decor">.</span></div>
+  <p>Objev, co ti dává smysl. Najdi svůj směr. Vytvoř něco vlastního.</p>
+  <p>Vytvořila Jana Pernicová © 2026</p>
+  <p><a href="https://www.instagram.com/janapernicova/" target="_blank" rel="noopener">@janapernicova</a></p>
+</footer>
 
 <script>
-const CONTACT_URL="https://www.instagram.com/";
-const qs=[
-["Co tě nejvíc baví?",["Pomáhat a naslouchat lidem","Tvořit a vymýšlet nové věci","Učit se a předávat znalosti","Plánovat a organizovat"],["lidé","tvorba","učení","systémy"]],
-["V čem jsi dobrá?",["Podporuji a chápu druhé","Přicházím s nápady","Vysvětluji a učím","Organizuji a řeším problémy"],["lidé","tvorba","učení","systémy"]],
-["Co tě nejvíc zajímá?",["Osobní rozvoj a vztahy","Design a digitální tvorba","Vzdělávání a informace","Podnikání a chytré systémy"],["lidé","tvorba","učení","systémy"]],
-["Komu bys ráda pomáhala?",["Ženám hledajícím nový směr","Lidem s nápady","Lidem, kteří se chtějí něco naučit","Podnikatelům a malým firmám"],["lidé","tvorba","učení","systémy"]],
-["Jaký produkt tě láká?",["Konzultace nebo individuální podpora","Digitální produkt či aplikace","Kurz nebo praktický průvodce","Organizační nástroj či služba"],["lidé","tvorba","učení","systémy"]],
-["Co je pro tebe teď nejdůležitější?",["Začít pomalu vedle povinností","Vytvořit něco online s malými náklady","Nejdřív nápad otestovat","Udělat si jasno a zvolit směr"],["malé kroky","online","test","jasno"]]
+const questions = [
+  {
+    q:"U čeho nejčastěji zapomínáš na čas?",
+    a:[
+      ["people","Když někomu naslouchám nebo pomáhám.","♡"],
+      ["create","Když něco tvořím, píšu nebo vymýšlím.","✦"],
+      ["teach","Když se něco učím a předávám dál.","☼"],
+      ["organize","Když plánuji, organizuji a hledám řešení.","◇"]
+    ]
+  },
+  {
+    q:"S čím se na tebe lidé často obracejí?",
+    a:[
+      ["people","S osobními otázkami a potřebou podpory.","♡"],
+      ["create","Pro nápady, inspiraci nebo kreativní řešení.","✦"],
+      ["teach","Abych jim něco vysvětlila nebo ukázala.","☼"],
+      ["organize","Když potřebují něco naplánovat či zařídit.","◇"]
+    ]
+  },
+  {
+    q:"Kdybys měla volný den jen pro sebe, co by tě lákalo?",
+    a:[
+      ["people","Setkat se s lidmi a vést zajímavé rozhovory.","♡"],
+      ["create","Vytvořit něco, co tu ještě není.","✦"],
+      ["teach","Objevovat nové téma a sdílet, co zjistím.","☼"],
+      ["organize","Naplánovat projekt a dotáhnout ho do konce.","◇"]
+    ]
+  },
+  {
+    q:"Jakou změnu bys ráda přinesla do světa?",
+    a:[
+      ["people","Aby se lidé cítili pochopení a méně sami.","♡"],
+      ["create","Aby měli kolem sebe více krásy a inspirace.","✦"],
+      ["teach","Aby měli více znalostí a důvěry v sebe.","☼"],
+      ["organize","Aby se věci dělaly jednodušeji a lépe.","◇"]
+    ]
+  },
+  {
+    q:"Co tě nejvíc láká na představě vlastního podnikání?",
+    a:[
+      ["people","Pomáhat lidem v tématu, které je mi blízké.","♡"],
+      ["create","Vytvořit vlastní produkt nebo značku.","✦"],
+      ["teach","Předávat své zkušenosti, znalosti či dovednosti.","☼"],
+      ["organize","Nabízet službu a mít věci ve vlastních rukou.","◇"]
+    ]
+  },
+  {
+    q:"Co ti dnes nejvíc brání udělat první krok?",
+    a:[
+      ["clarity","Nevím, jaké téma nebo směr si vybrat.","?"],
+      ["idea","Mám hodně nápadů, ale žádný hotový produkt.","✦"],
+      ["confidence","Pochybuji, jestli mám ostatním co nabídnout.","♡"],
+      ["plan","Nevím, jak nápad proměnit v konkrétní plán.","◇"]
+    ]
+  }
 ];
-const profiles={
-"lidé":["Tvoje síla může být v práci s lidmi.","Mohla bys prozkoumat podporu konkrétní skupiny lidí, konzultace nebo praktický průvodce. Zvaž své zkušenosti a kompetence.","Promluv si se třemi lidmi, kterým bys chtěla pomáhat. Zjisti, co skutečně potřebují."],
-"tvorba":["Tvoje síla může být v tvorbě nových řešení.","Zvaž digitální produkty, šablony nebo jednoduché online nástroje řešící konkrétní problém.","Sepiš tři problémy, které umíš řešit, a zamysli se, komu by tvé řešení pomohlo."],
-"učení":["Tvoje síla může být v předávání znalostí.","Zvaž vzdělávací obsah, pracovní sešit nebo praktický návod v oblasti, kterou dobře znáš.","Sepiš pět otázek, které lidé často pokládají k tématu, kterému rozumíš."],
-"systémy":["Tvoje síla může být v hledání systému.","Zvaž organizační šablony nebo služby, které podnikatelům usnadní opakující se úkoly.","Zeptej se tří podnikatelů, co jim zbytečně zabírá čas."]
+
+const profiles = {
+  people:{
+    title:"Pomoc a lidské propojení",
+    description:"Mohl by ti sedět projekt postavený na podpoře lidí, komunitě nebo službě, která druhým usnadňuje život. Prozkoumej témata, která znáš z vlastní zkušenosti a která tě skutečně zajímají.",
+    steps:[
+      "Napiš si tři skupiny lidí, kterým bys ráda pomáhala.",
+      "Zamysli se, s jakým konkrétním problémem se potýkají.",
+      "Promluv si s jedním člověkem z této skupiny a zjisti, co by mu opravdu pomohlo."
+    ]
+  },
+  create:{
+    title:"Tvoření a vlastní nápady",
+    description:"Tvoje odpovědi ukazují na zájem něco vytvářet. Může to být digitální produkt, pracovní sešit, obsah, kreativní výrobek nebo nová služba. Začni malou verzí jednoho nápadu.",
+    steps:[
+      "Sepiš pět věcí, které bys ráda vytvořila.",
+      "Vyber jednu, která řeší skutečnou potřebu konkrétního člověka.",
+      "Navrhni jednoduchou první verzi, kterou můžeš otestovat bez velkých nákladů."
+    ]
+  },
+  teach:{
+    title:"Znalosti a předávání zkušeností",
+    description:"Mohl by tě bavit projekt, ve kterém lidem něco vysvětluješ, učíš je nebo jim pomáháš získat nové dovednosti. Nemusíš vědět všechno. Důležité je jasně vymezit, co umíš a komu to může být užitečné.",
+    steps:[
+      "Napiš tři témata, o kterých ráda mluvíš nebo se je učíš.",
+      "U každého si poznamenej, komu by tvoje zkušenost mohla pomoci.",
+      "Vytvoř krátký návod, příspěvek nebo mini lekci a zjisti, jak na ni lidé reagují."
+    ]
+  },
+  organize:{
+    title:"Praktická řešení a organizace",
+    description:"Možná máš talent dávat věcem řád, plánovat a hledat funkční postupy. Takový základ může vést k organizační službě, podpoře podnikatelů nebo projektu, který lidem šetří čas a energii.",
+    steps:[
+      "Všimni si tří situací, ve kterých přirozeně hledáš systém nebo řešení.",
+      "Vyber jednu skupinu lidí, které by toto řešení mohlo pomoci.",
+      "Popiš jednoduchou službu, kterou bys jim mohla nabídnout, a ověř jejich zájem."
+    ]
+  }
 };
-let i=0,answers=[];
-function start(){i=0;answers=[];show("quiz");render();window.scrollTo(0,0)}
-function show(id){["intro","quiz","result"].forEach(x=>document.getElementById(x).hidden=x!==id)}
-function render(){
-let q=qs[i];
-document.getElementById("count").textContent=`OTÁZKA ${i+1} / ${qs.length}`;
-document.getElementById("bar").style.width=((i+1)/qs.length*100)+"%";
-document.getElementById("title").textContent=q[0];
-document.getElementById("hint").textContent="Vyber odpověď, která ti právě teď sedí nejvíc.";
-document.getElementById("next").textContent=i===qs.length-1?"UKÁZAT MŮJ SMĚR →":"POKRAČOVAT →";
-document.getElementById("opts").innerHTML="";
-q[1].forEach((text,j)=>{
-let b=document.createElement("button");
-b.className="option"+(answers[i]===j?" selected":"");
-b.textContent=["✧ ","◇ ","♡ ","✦ "][j]+text;
-b.onclick=()=>{answers[i]=j;render()};
-document.getElementById("opts").appendChild(b);
-});
-}
-function next(){
-if(answers[i]===undefined){alert("Vyber prosím jednu odpověď. 💜");return}
-if(i<qs.length-1){i++;render()}else finish()
-}
-function finish(){
-let scores={};
-answers.slice(0,5).forEach((a,j)=>{let k=qs[j][2][a];scores[k]=(scores[k]||0)+1});
-let best=Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0];
-let p=profiles[best]||profiles["tvorba"];
-document.getElementById("headline").textContent=p[0];
-document.getElementById("introResult").textContent=p[1];
-document.getElementById("ideas").innerHTML="";
-let suggestions=[p[1],"Začni tím, že ověříš, zda lidé tento problém opravdu potřebují řešit."];
-suggestions.forEach((s,j)=>{
-let d=document.createElement("div");d.className="result";
-let b=document.createElement("b");b.textContent=j===0?"Možný směr":"Co si ověřit";
-let t=document.createElement("p");t.textContent=s;d.append(b,t);
-document.getElementById("ideas").appendChild(d);
-});
-let last=qs[5][2][answers[5]];
-let actions={
-"malé kroky":"Vyhraď si 30 minut týdně na jeden malý krok.",
-"online":"Načrtni nejmenší užitečnou verzi svého digitálního produktu.",
-"test":"Ukaž svůj nápad pěti potenciálním zákazníkům a ptej se na jejich potřeby.",
-"jasno":"Porovnej tři nápady podle svých zájmů, schopností, potřeb trhu a času."
+
+const finalGuides = {
+  clarity:{
+    title:"Začni hledáním tématu",
+    text:"Nemusíš mít produkt. Potřebuješ lépe poznat, co tě zajímá, co umíš a komu by to mohlo pomoci.",
+    steps:[
+      "Sepiš témata, která tě přirozeně přitahují.",
+      "Propoj je se svými zkušenostmi a potřebami lidí kolem sebe.",
+      "Vyber jedno téma, které chceš prozkoumat jako první."
+    ]
+  },
+  idea:{
+    title:"Vyber jeden nápad",
+    text:"Množství nápadů může být skvělý začátek. Teď je čas vybrat jeden a ověřit, jestli má smysl ho rozvíjet.",
+    steps:[
+      "Napiš si všechny své nápady na jedno místo.",
+      "Vyber ten, který řeší konkrétní problém.",
+      "Vymysli nejjednodušší způsob, jak ho otestovat."
+    ]
+  },
+  confidence:{
+    title:"Objev, co už můžeš nabídnout",
+    text:"Nemusíš být nejlepší na světě. Potřebuješ rozpoznat, jaké zkušenosti, schopnosti a pohled můžeš nabídnout konkrétním lidem.",
+    steps:[
+      "Sepiš situace, které už jsi zvládla nebo se v nich něco naučila.",
+      "Zeptej se dvou lidí, s čím jim podle nich umíš pomoci.",
+      "Vyber jednu schopnost, kterou chceš dál rozvíjet."
+    ]
+  },
+  plan:{
+    title:"Rozděl nápad na malé kroky",
+    text:"Velký projekt působí náročně, dokud nevíš, co udělat jako první. Teď nepotřebuješ dokonalý plán, jen další konkrétní krok.",
+    steps:[
+      "Popiš svůj nápad jednou větou.",
+      "Urči, komu má pomoci a jaký problém řeší.",
+      "Vyber jeden malý krok, který zvládneš během tohoto týdne."
+    ]
+  }
 };
-document.getElementById("action").textContent=actions[last]||p[2];
-show("result");window.scrollTo(0,0)
+
+let current = 0;
+let answers = [];
+let selected = null;
+
+function startQuiz(){
+  current=0;
+  answers=[];
+  document.getElementById("welcome").classList.add("hidden");
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  renderQuestion();
+  window.scrollTo({top:0,behavior:"smooth"});
 }
-function contact(){window.open(CONTACT_URL,"_blank","noopener,noreferrer")}
-function restart(){show("intro");window.scrollTo(0,0)}
+
+function renderQuestion(){
+  selected=null;
+  const item=questions[current];
+  document.getElementById("question").textContent=item.q;
+  document.getElementById("progressText").textContent=
+    "OTÁZKA "+(current+1)+" Z "+questions.length;
+  const pct=Math.round((current+1)/questions.length*100);
+  document.getElementById("percent").textContent=pct+" %";
+  document.getElementById("bar").style.width=pct+"%";
+  document.getElementById("back").textContent=
+    current===0?"← Začít znovu":"← Zpět";
+  const container=document.getElementById("answers");
+  container.innerHTML="";
+  item.a.forEach(([value,label,symbol])=>{
+    const button=document.createElement("button");
+    button.className="answer";
+    button.innerHTML='<span class="symbol">'+symbol+'</span><span></span>';
+    button.querySelector("span:last-child").textContent=label;
+    button.onclick=()=>{
+      selected=value;
+      answers[current]=value;
+      [...container.children].forEach(b=>b.classList.remove("selected"));
+      button.classList.add("selected");
+      setTimeout(()=>{
+        if(current<questions.length-1){
+          current++;
+          renderQuestion();
+        }else{
+          showResult();
+        }
+      },180);
+    };
+    container.appendChild(button);
+  });
+}
+
+function previousQuestion(){
+  if(current===0){
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("welcome").classList.remove("hidden");
+    return;
+  }
+  current--;
+  renderQuestion();
+}
+
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+
+  const scores={people:0,create:0,teach:0,organize:0};
+  answers.slice(0,5).forEach(value=>{
+    if(scores[value]!==undefined)scores[value]++;
+  });
+
+  const ranked=Object.keys(scores).sort((a,b)=>scores[b]-scores[a]);
+  const profile=profiles[ranked[0]];
+  const guide=finalGuides[answers[5]];
+
+  document.getElementById("resultTitle").textContent=profile.title;
+  document.getElementById("resultDescription").textContent=profile.description;
+
+  const list=document.getElementById("steps");
+  list.innerHTML="";
+  const allSteps=[...profile.steps,...guide.steps];
+  const unique=[...new Set(allSteps)].slice(0,4);
+  unique.forEach(step=>{
+    const li=document.createElement("li");
+    li.textContent=step;
+    list.appendChild(li);
+  });
+
+  const extra=document.createElement("p");
+  extra.className="muted";
+  extra.textContent=guide.text;
+  list.after(extra);
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function restartQuiz(){
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("welcome").classList.remove("hidden");
+  document.getElementById("quiz").classList.add("hidden");
+  current=0;
+  answers=[];
+  window.scrollTo({top:0,behavior:"smooth"});
+}
 </script>
 </body>
 </html>
